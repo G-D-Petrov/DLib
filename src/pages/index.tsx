@@ -3,7 +3,7 @@ import { type NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";
 import { LoadingPage } from "~/components/loading";
-import NavBar from "~/components/navbar";
+// import NavBar from "~/components/navbar";
 
 import { api } from "~/utils/api";
 
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       {user.isSignedIn && <UserLandingPage />}
     </>
   );

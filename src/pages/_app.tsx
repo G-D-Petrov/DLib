@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import "~/styles/globals.css";
 import Head from "next/head";
+import NavBar from "~/components/navbar";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -15,6 +16,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster position="bottom-center" />
+      <NavBar />
       <Component {...pageProps} />
     </ClerkProvider>
   );

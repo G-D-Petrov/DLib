@@ -1,10 +1,11 @@
+import { useUser } from "@clerk/nextjs";
 import { NextPage } from "next";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Loading } from "~/components/loading";
+import { Loading, LoadingPage } from "~/components/loading";
 import { api } from "~/utils/api";
 
-const Add: NextPage = () => {
+const AddBookWizard: NextPage = () => {
     const [title, setTitle] = useState<string>("");
     const [author, setAuthor] = useState<string>("");
     const [town, setTown] = useState<string>("");
@@ -57,6 +58,27 @@ const Add: NextPage = () => {
             </form>
         </div>
         );
+};
+
+const Add: NextPage = () => {
+    const user = useUser();
+
+    if (!user.isLoaded) {
+        return <LoadingPage />;
+    }
+
+    if (!user.isSignedIn) {
+        return <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-top">
+                <h1 className="text-6xl font-bold text-red-200">Welcome to DLib!</h1>
+                <p className="mt-3 text-2xl text-slate-100">Please sign in to add a book.</p>
+            </main>
+        </div>;
+    }
+
+    return (
+        <AddBookWizard />
+    );
 };
 
 export default Add;

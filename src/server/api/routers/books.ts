@@ -96,4 +96,21 @@ export const booksRouter = createTRPCRouter({
 
         return book;
     }),
+    getAll: publicProcedure.query(async ({ ctx }) => {
+        return ctx.prisma.book.findMany({
+            where: {
+                clerkId: ctx.userId || "",
+            },
+            take: 100,
+        });
+    }),
+    getBookById: publicProcedure.input(z.object({
+        id: z.number(),
+    })).query(async ({ ctx, input }) => {
+        return ctx.prisma.book.findUnique({
+            where: {
+                id: input.id,
+            },
+        });
+    }),
 });
