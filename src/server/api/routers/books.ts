@@ -1,5 +1,3 @@
-import { clerkClient } from "@clerk/nextjs/server";
-import type { Book, UserLocal, Location } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 // import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 // import { Redis } from "@upstash/redis";
@@ -7,7 +5,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { createTRPCRouter, privateProcedure, publicProcedure } from "~/server/api/trpc";    
-import { filterUserForClient } from "~/server/helpers/filterUserForClient";
+// import { filterUserForClient } from "~/server/helpers/filterUserForClient";
 
 // const addUserDataToPosts = async (posts: Post[]) => {
 //     const users = (await clerkClient.users.getUserList({
