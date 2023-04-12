@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/nextjs";
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Loading, LoadingPage } from "~/components/loading";

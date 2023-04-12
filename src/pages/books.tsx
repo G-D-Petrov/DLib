@@ -15,8 +15,8 @@ const Feed = () => {
     return (
       <div className="flex flex-col">
         {data?.map((book) => (
-        <Link href={`/books/${book.id}`}>
-          <div key={book.id} className="border border-slate-400 rounded-lg p-4 flex mb-1 text-slate-300">
+        <Link href={`/books/${book.id}`} key={book.id}>
+          <div className="border border-slate-400 rounded-lg p-4 flex mb-1 text-slate-300">
             <div className="flex flex-col">
                 <div className="flex">
                     <div className="font-bold">Title:</div>

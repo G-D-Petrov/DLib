@@ -1,11 +1,8 @@
 import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Link from "next/link";
-import { useEffect } from "react";
-import { LoadingPage } from "~/components/loading";
-// import NavBar from "~/components/navbar";
 
-import { api } from "~/utils/api";
+// import NavBar from "~/components/navbar";
 
 
 const UserLandingPage = () => {
