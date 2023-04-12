@@ -39,6 +39,16 @@ export default function NavBar() {
                                 isMenuOpen ? 'block' : 'hidden'
                                 }`} id="navbar-cta">
                     <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                    {user.isSignedIn && (
+                        <li>
+                            <Link href="/add" className="block py-2 pl-3 pr-4 text-slate-200 hover:bg-transparent hover:text-slate-600 md:p-0">Add Book</Link>
+                        </li>
+                    )}
+                    {user.isSignedIn && (
+                        <li>
+                            <Link href="/books" className="block py-2 pl-3 pr-4 text-slate-200 hover:bg-transparent hover:text-slate-600 md:p-0">View Books</Link>
+                        </li>
+                    )}
                     <li>
                         <Link href="/about" className="block py-2 pl-3 pr-4 text-slate-200 hover:bg-transparent hover:text-slate-600 md:p-0">About</Link>
                     </li>
