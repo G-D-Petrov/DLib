@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPropsContext, type NextPage } from "next";
+import { type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { Loading, LoadingPage } from "~/components/loading";
 import { api } from "~/utils/api";
