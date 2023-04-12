@@ -9,14 +9,15 @@ import superjson from 'superjson';
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { type Book } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
 
 const DeleteBook = (book:Book) => {
   const [id] = useState<string>(book.id.toString());
   const {mutate, isLoading } = api.books.deleteBookById.useMutation({
-    onSuccess: (data: any) => {
+    onSuccess: (data) => {
       toast.success(`${data.title} deleted successfully!`);
     },
-    onError: (err: any) => {
+    onError: (err) => {
       toast.error(err.message);
     }
   });
