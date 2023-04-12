@@ -9,12 +9,11 @@ import superjson from 'superjson';
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { type Book } from "@prisma/client";
-import { TRPCError } from "@trpc/server";
 
 const DeleteBook = (book:Book) => {
   const [id] = useState<string>(book.id.toString());
   const {mutate, isLoading } = api.books.deleteBookById.useMutation({
-    onSuccess: (data) => {
+    onSuccess: (data: Book) => {
       toast.success(`${data.title} deleted successfully!`);
     },
     onError: (err) => {
@@ -45,10 +44,10 @@ const ViewBookWizard = (book: Book) => {
   const [address, setAddress] = useState<string>(book.address);
 
   const { mutate, isLoading } = api.books.updateBookById.useMutation({
-    onSuccess: (data: any) => {
+    onSuccess: (data: Book) => {
       toast.success(`${data.title} updated successfully!`);
     },
-    onError: (err: any) => {
+    onError: (err) => {
       toast.error(err.message);
     }
   });
