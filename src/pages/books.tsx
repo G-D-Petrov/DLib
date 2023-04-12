@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import Link from "next/link";
 import { LoadingPage } from "~/components/loading";
 import { PageLayout } from "~/components/page_layout";
