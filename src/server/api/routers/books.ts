@@ -96,7 +96,7 @@ export const booksRouter = createTRPCRouter({
 
         return book;
     }),
-    getAll: publicProcedure.query(async ({ ctx }) => {
+    getAll: privateProcedure.query(async ({ ctx }) => {
         return ctx.prisma.book.findMany({
             where: {
                 clerkId: ctx.userId || "",
@@ -105,11 +105,79 @@ export const booksRouter = createTRPCRouter({
         });
     }),
     getBookById: publicProcedure.input(z.object({
-        id: z.number(),
+        id: z.string().nonempty(),
     })).query(async ({ ctx, input }) => {
         return ctx.prisma.book.findUnique({
             where: {
-                id: input.id,
+                id: Number(input.id),
+            },
+        });
+    }),
+    deleteBookById: privateProcedure.input(z.object({
+        id: z.string().nonempty(),
+    })).mutation(async ({ ctx, input }) => {
+        const book = await ctx.prisma.book.findUnique({
+            where: {
+                id: Number(input.id),
+            },
+        });
+
+        if (!book) {
+            throw new TRPCError({
+                code: "NOT_FOUND",
+                message: "Book not found.",
+            });
+        }
+
+        if (book.clerkId !== ctx.userId) {
+            throw new TRPCError({
+                code: "UNAUTHORIZED",
+                message: "You can only delete your own books.",
+            });
+        }
+
+        return ctx.prisma.book.delete({
+            where: {
+                id: Number(input.id),
+            },
+        });
+    }),
+    updateBookById: privateProcedure.input(z.object({
+        id: z.string().nonempty(),
+        title: z.string().min(1).max(50),
+        author: z.string().min(1).max(50),
+        town: z.string().min(1).max(50),
+        address: z.string().min(1).max(50),
+    })).mutation(async ({ ctx, input }) => {
+        const book = await ctx.prisma.book.findUnique({
+            where: {
+                id: Number(input.id),
+            },
+        });
+
+        if (!book) {
+            throw new TRPCError({
+                code: "NOT_FOUND",
+                message: "Book not found.",
+            });
+        }
+
+        if (book.clerkId !== ctx.userId) {
+            throw new TRPCError({
+                code: "UNAUTHORIZED",
+                message: "You can only update your own books.",
+            });
+        }
+
+        return ctx.prisma.book.update({
+            where: {
+                id: Number(input.id),
+            },
+            data: {
+                title: input.title,
+                author: input.author,
+                town: input.town,
+                address: input.address,
             },
         });
     }),
