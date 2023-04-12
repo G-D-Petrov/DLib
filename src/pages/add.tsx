@@ -11,7 +11,7 @@ const AddBookWizard: NextPage = () => {
     const [town, setTown] = useState<string>("");
     const [address, setAddress] = useState<string>("");
 
-    const { mutate, isLoading: isPosting } = api.books.add.useMutation({
+    const { mutate, isLoading } = api.books.add.useMutation({
         onSuccess: (data) => {
             toast.success(`${data.title} added successfully!`);
         },
@@ -45,16 +45,15 @@ const AddBookWizard: NextPage = () => {
                 <input className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                 type="text" placeholder="Example Street" onChange={(e) => setAddress(e.target.value)}  />
             </div>
-            {!isPosting && <button
+            {!isLoading && <button
                 className="w-full bg-zinc-600 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-zinc-800 transition duration-300"
                 type="submit" onClick={(e) => {
                     e.preventDefault();
                     console.log(title, author, town, address);
                     mutate({title, author, town, address});
                 }}
-                disabled={isPosting}>Add book</button>}
-
-                {isPosting && <div className="flex items-center"><Loading /></div>}
+                disabled={isLoading}>Add book</button>}
+            {isLoading && <div className="flex flex-col items-center"><Loading /></div>}
             </form>
         </div>
         );
