@@ -1,4 +1,4 @@
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { LoadingPage } from "./loading";
 import Image from "next/image";
@@ -26,9 +26,7 @@ export default function NavBar() {
                     {!user.isSignedIn && <div className="text-white bg-slate-400 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
                         <SignInButton >Login</SignInButton>
                     </div>}
-                    {!!user.isSignedIn && <div className="text-white bg-slate-400 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
-                        <SignOutButton >Logout</SignOutButton>
-                    </div>}
+                    {!!user.isSignedIn && <UserButton />}
                     
                     <button onClick={() => setIsMenuOpen(!isMenuOpen)}  data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded={isMenuOpen}>
                         <span className="sr-only">Open main menu</span>
