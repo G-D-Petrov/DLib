@@ -9,32 +9,7 @@ import superjson from 'superjson';
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { type Book } from "@prisma/client";
-
-const DeleteBook = (book:Book) => {
-  const [id] = useState<string>(book.id.toString());
-  const {mutate, isLoading } = api.books.deleteBookById.useMutation({
-    onSuccess: (data: Book) => {
-      toast.success(`${data.title} deleted successfully!`);
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    }
-  });
-
-  return (
-    <div className="mt-4">
-      {!isLoading && <button
-      className="w-full bg-red-600 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-red-800 transition duration-300"
-      type="submit" onClick={(e) => {
-          e.preventDefault();
-          console.log(id);
-          mutate({id});
-      }}
-      disabled={isLoading}>Delete book</button>}
-      {isLoading && <div className="flex flex-col items-center"><Loading /></div>}
-    </div>
-  );
-};
+import DeleteModal from "~/components/delete_modal";
 
 const ViewBookWizard = (book: Book) => {
   const [id] = useState<string>(book.id.toString());
@@ -96,7 +71,7 @@ const ViewBookWizard = (book: Book) => {
             }}
             disabled={isLoading}>Update book</button>}
         {isLoading && <div className="flex flex-col items-center"><Loading /></div>}
-        <DeleteBook {...book} />
+        <DeleteModal {...book}/>
         </form>
     </div>
     );
