@@ -26,7 +26,7 @@ const DeleteModal = (book:Book) => {
             Delete
         </button>
         
-        {showModal && <div tabIndex={-1} id="defaultModal" className="absolute translate-x-1/3 translate-y-1/4 ml-auto mr-auto w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        {showModal && <div tabIndex={-1} id="defaultModal" className="absolute top-1/3 left-4 md:translate-x-1/3 md:translate-y-1/4 ml-auto mr-auto w-screen p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-screen">
                 <div className="relative w-full max-w-xl max-h-full">
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
